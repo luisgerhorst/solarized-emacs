@@ -116,6 +116,14 @@ Related discussion: https://github.com/bbatsov/solarized-emacs/issues/158"
   :type 'boolean
   :group 'solarized)
 
+(defcustom solarized-iterm (not (display-graphic-p))
+  "Whether to use workaround for iTerm.
+
+This changes the main color values to values that work in iTerm
+when the Solarized Dark palette is set there."
+  :type 'boolean
+  :group 'solarized)
+
 ;;; Utilities
 
 ;;;###autoload
@@ -139,29 +147,29 @@ Alpha should be a float between 0 and 1."
           (light-class (append '((background light)) class))
           (dark-class (append '((background dark)) class))
           (variant ,variant)
-          (s-base03    "#002b36")
-          (s-base02    "#073642")
+          (s-base03    (if solarized-iterm "#7f7f7f" "#002b36"))
+          (s-base02    (if solarized-iterm "#000000" "#073642"))
           ;; emphasized content
-          (s-base01    "#586e75")
+          (s-base01    (if solarized-iterm "#00ff00" "#586e75"))
           ;; primary content
-          (s-base00    "#657b83")
-          (s-base0     "#839496")
+          (s-base00    (if solarized-iterm "#ffff00" "#657b83"))
+          (s-base0     (if solarized-iterm "#5c5cff" "#839496"))
           ;; comments
-          (s-base1     "#93a1a1")
+          (s-base1     (if solarized-iterm "#00ffff" "#93a1a1"))
           ;; background highlight light
-          (s-base2     "#eee8d5")
+          (s-base2     (if solarized-iterm "#e5e5e5" "#eee8d5"))
           ;; background light
-          (s-base3     "#fdf6e3")
+          (s-base3     (if solarized-iterm "#ffffff" "#fdf6e3"))
 
           ;; Solarized accented colors
-          (yellow    "#b58900")
-          (orange    "#cb4b16")
-          (red       "#dc322f")
-          (magenta   "#d33682")
-          (violet    "#6c71c4")
-          (blue      "#268bd2")
-          (cyan      "#2aa198")
-          (green     "#859900")
+          (yellow    (if solarized-iterm "#cdcd00" "#b58900"))
+          (orange    (if solarized-iterm "#ff0000" "#cb4b16"))
+          (red       (if solarized-iterm "#cd0000" "#dc322f"))
+          (magenta   (if solarized-iterm "#cd00cd" "#d33682"))
+          (violet    (if solarized-iterm "#ff00ff" "#6c71c4"))
+          (blue      (if solarized-iterm "#0000ee" "#268bd2"))
+          (cyan      (if solarized-iterm "#00cdcd" "#2aa198"))
+          (green     (if solarized-iterm "#00cd00" "#859900"))
 
           ;; Darker and lighter accented colors
           ;; Only use these in exceptional circumstances!
