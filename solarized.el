@@ -112,7 +112,12 @@ Related discussion: https://github.com/bbatsov/solarized-emacs/issues/158"
   :group 'solarized)
 
 (defcustom solarized-scale-org-headlines t
-  "Whether scaling of outline-headlines should apply to `org-mode' headlines."
+  "Whether `org-mode' headlines should be scaled."
+  :type 'boolean
+  :group 'solarized)
+
+(defcustom solarized-scale-outline-headlines t
+  "Whether `outline-mode' headlines should be scaled."
   :type 'boolean
   :group 'solarized)
 
@@ -375,7 +380,7 @@ customize the resulting theme."
      `(dired-async-message ((,light-class (:background ,yellow-l ))
                             (,dark-class (:background ,yellow ))))
      `(dired-async-mode-message ((,light-class (:background ,red-l))
-                                 (,dark-class (:background red))))
+                                 (,dark-class (:background ,red))))
 ;;;;; dired-efap
      `(dired-efap-face ((,class (:box nil
                                       :background ,base02
@@ -462,6 +467,44 @@ customize the resulting theme."
                              :inverse-video nil))))
      `(ace-jump-face-foreground
        ((,class (:foreground ,red :background ,base03 :inverse-video nil :weight bold))))
+;;;;; all-the-icons, all-the-icons-dired, spaceline-all-the-icons
+     `(spaceline-all-the-icons-info-face ((,class (:foreground ,blue))))
+     `(spaceline-all-the-icons-sunrise-face ((,class (:foreground ,yellow))))
+     `(spaceline-all-the-icons-sunrise-face ((,class (:foreground ,orange))))
+     `(all-the-icons-dired-dir-face ((,class (:foreground ,base0))))
+     `(all-the-icons-red ((,class (:foreground ,red))))
+     `(all-the-icons-lred ((,class (:foreground ,red-lc))))
+     `(all-the-icons-dred ((,class (:foreground ,red-hc))))
+     `(all-the-icons-red-alt ((,class (:foreground ,red))))
+     `(all-the-icons-green ((,class (:foreground ,green))))
+     `(all-the-icons-lgreen ((,class (:foreground ,green-lc))))
+     `(all-the-icons-dgreen ((,class (:foreground ,green-hc))))
+     `(all-the-icons-yellow ((,class (:foreground ,yellow))))
+     `(all-the-icons-lyellow ((,class (:foreground ,yellow-lc))))
+     `(all-the-icons-dyellow ((,class (:foreground ,yellow-hc))))
+     `(all-the-icons-blue ((,class (:foreground ,blue))))
+     `(all-the-icons-blue-alt ((,class (:foreground ,blue))))
+     `(all-the-icons-lblue ((,class (:foreground ,blue-lc))))
+     `(all-the-icons-dblue ((,class (:foreground ,blue-hc))))
+     `(all-the-icons-maroon ((,class (:foreground ,magenta-d))))
+     `(all-the-icons-lmaroon ((,class (:foreground ,magenta-d))))
+     `(all-the-icons-dmaroon ((,class (:foreground ,magenta-d))))
+     `(all-the-icons-purple ((,class (:foreground ,violet))))
+     `(all-the-icons-lpurple ((,class (:foreground ,violet-lc))))
+     `(all-the-icons-dpurple ((,class (:foreground ,violet-hc))))
+     `(all-the-icons-orange ((,class (:foreground ,orange))))
+     `(all-the-icons-lorange ((,class (:foreground ,orange-lc))))
+     `(all-the-icons-dorange ((,class (:foreground ,orange-hc))))
+     `(all-the-icons-cyan ((,class (:foreground ,cyan))))
+     `(all-the-icons-cyan-alt ((,class (:foreground ,cyan))))
+     `(all-the-icons-lcyan ((,class (:foreground ,cyan-lc))))
+     `(all-the-icons-dcyan ((,class (:foreground ,cyan-hc))))
+     `(all-the-icons-pink ((,class (:foreground ,magenta))))
+     `(all-the-icons-lpink ((,class (:foreground ,magenta-lc))))
+     `(all-the-icons-dpink ((,class (:foreground ,magenta-hc))))
+     `(all-the-icons-silver ((,class (:foreground ,base0))))
+     `(all-the-icons-lsilver ((,class (:foreground ,base01))))
+     `(all-the-icons-dsilver ((,class (:foreground ,base1))))
 ;;;;; android-mode
      `(android-mode-debug-face ((,class (:foreground ,green))))
      `(android-mode-error-face ((,class (:foreground ,orange :weight bold))))
@@ -559,7 +602,7 @@ customize the resulting theme."
      `(cider-result-overlay-face ((t (:background unspecified))))
      `(cider-enlightened-face ((t (:box (:color ,magenta :line-width -1)))))
      `(cider-enlightened-local-face ((t (:weight bold :foreground ,green-l))))
-     `(cider-deprecated-face ((t (:background ,yellow))))
+     `(cider-deprecated-face ((t (:underline (:color ,yellow)))))
      `(cider-instrumented-face ((t (:box (:color ,red-l :line-width -1)))))
      `(cider-traced-face ((t (:box (:color ,cyan :line-width -1)))))
      `(cider-fringe-good-face ((t (:foreground ,green-l))))
@@ -576,17 +619,24 @@ customize the resulting theme."
      `(column-enforce-face ((,class (:background unspecified :foreground ,magenta
                                                  :inverse-video unspecified))))
 ;;;;; company-mode
-     `(company-template-field ((,class (:background ,yellow :foreground ,base02))))
-     `(company-tooltip ((,class (:background ,base02 :foreground ,cyan))))
-     `(company-tooltip-selection ((,class (:background ,cyan-lc :foreground ,cyan-hc))))
-     `(company-tooltip-mouse ((,class (:background ,cyan-hc :foreground ,cyan-lc))))
-     `(company-tooltip-common ((,class (:foreground ,base1 :underline t))))
-     `(company-tooltip-common-selection ((,class (:foreground ,base1 :underline t))))
-     `(company-tooltip-annotation ((,class (:foreground ,base1 :background ,base02))))
-     `(company-scrollbar-fg ((,class (:foreground ,base03 :background ,base0))))
+     `(company-echo ((,class nil)))
+     `(company-echo-common ((,class (:background ,red))))
+     `(company-preview ((,class (:background ,base02 :foreground ,base1))))
+     `(company-preview-common ((,class (:foreground ,base1))))
+     `(company-preview-search ((,class (:foreground ,magenta))))
      `(company-scrollbar-bg ((,class (:background ,base02 :foreground ,cyan))))
-     `(company-preview ((,class (:background ,base02 :foreground ,cyan))))
-     `(company-preview-common ((,class (:foreground ,base1 :underline t))))
+     `(company-scrollbar-fg ((,class (:foreground ,base03 :background ,base0))))
+     `(company-template-field ((,class (:background ,yellow :foreground ,base02))))
+     `(company-tooltip ((,class (:foreground ,base1 :background ,base02))))
+     `(company-tooltip-annotation ((,class (:foreground ,cyan))))
+     `(company-tooltip-annotation-selection ((,class (:foreground ,cyan))))
+     `(company-tooltip-common ((,class (:foreground ,base0))))
+     `(company-tooltip-common-selection ((,class (:weight bold))))
+     `(company-tooltip-mouse ((,class (:background ,cyan-hc :foreground ,cyan-lc))))
+     `(company-tooltip-search ((,class (:foreground ,magenta))))
+     `(company-tooltip-search-selection ((,class (:foreground ,magenta :weight bold))))
+     `(company-tooltip-selection ((,class (:weight bold))))
+
 ;;;;; cperl-mode
      `(cperl-array-face ((,class (:background unspecified :foreground ,blue))))
      `(cperl-hash-face ((,class (:background unspecified :foreground ,blue))))
@@ -885,6 +935,9 @@ customize the resulting theme."
        ((,(append '((supports :underline (:style wave))) class)
          (:underline (:style wave :color ,red) :inherit unspecified))
         (,class (:foreground ,red :weight bold :underline t))))
+;;;;; form-feed
+     `(form-feed-line
+       ((,class (:strike-through ,s-line))))
 ;;;;; git-commit
      `(git-commit-comment-action  ((,class (:foreground ,base0  :weight bold))))
      `(git-commit-comment-branch ; obsolete
@@ -1132,6 +1185,11 @@ customize the resulting theme."
      `(ido-virtual ((,class (:foreground ,cyan))))
 ;;;;; iedit-mode
      `(iedit-occurrence ((,class (:background ,base03 :foreground ,magenta :bold t))))
+;;;;; imenu-list
+     `(imenu-list-entry-face-0 ((,class (:inherit font-lock-type-face))))
+     `(imenu-list-entry-face-1 ((,class (:inherit font-lock-function-name-face))))
+     `(imenu-list-entry-face-2 ((,class (:inherit font-lock-variable-name-face))))
+     `(imenu-list-entry-face-3 ((,class (:inherit font-lock-string-face))))
 ;;;;; info
      `(info-title-1 ((,class (:foreground ,base1 :weight bold))))
      `(info-title-2 ((,class (:foreground ,base1 :weight bold))))
@@ -1174,7 +1232,7 @@ customize the resulting theme."
        ((,class (:foreground ,orange :background ,base02))))
 ;;;;; ivy
      `(ivy-confirm-face ((,class (:foreground ,green))))
-     `(ivy-current-match ((,class (:weight bold :background ,base02))))
+     `(ivy-current-match ((,class (:weight bold :background ,base02 :underline t))))
      `(ivy-match-required-face ((,class (:foreground ,red))))
      `(ivy-minibuffer-match-face-1 ((,class (:foreground ,base1))))
      `(ivy-minibuffer-match-face-2 ((,class (:foreground ,yellow))))
@@ -1311,6 +1369,11 @@ customize the resulting theme."
      `(kite-tag-delimiter-face ((,class (:inherit kite-delimiter-face))))
      `(kite-tag-slash-face ((,class (:inherit kite-name-face))))
      `(kite-undefined ((,class (:inherit font-lock-constant-face))))
+;;;;; langtool
+     `(langtool-errline ((,(append '((supports :underline (:style wave))) class)
+                          (:underline (:style wave :color ,green) :inherit unspecified))
+                         (,class (:foreground ,red :weight bold :underline t))))
+     `(langtool-correction-face ((,class (:inherit default :weight bold))))
 ;;;;; ledger-mode
      `(ledger-font-payee-uncleared-face ((t (:foreground ,red))))
      `(ledger-font-payee-cleared-face ((t (:foreground ,green :weight normal))))
@@ -1329,13 +1392,19 @@ customize the resulting theme."
      `(ledger-font-reconciler-pending-face ((t (:foreground ,yellow :weight normal))))
      `(ledger-font-report-clickable-face ((t (:foreground ,yellow :weight normal))))
 ;;;;; linum-mode
-     `(linum ((,class (:weight normal :underline nil :foreground ,s-fringe-fg :background ,s-fringe-bg))))
+     `(linum ((,class (:weight thin :underline nil :foreground ,s-fringe-fg :background ,s-fringe-bg))))
      `(linum-relative-current-face ((,class (:inherit linum))))
+;;;;; display-line-number-mode
+     `(line-number ((,class (:weight thin :underline nil :foreground ,s-fringe-fg :background ,s-fringe-bg))))
+;;;;; lsp-ui
+     `(lsp-ui-sideline-code-action ((,class (:foreground ,yellow :weight normal))))
 ;;;;; lusty-explorer
      `(lusty-directory-face ((,class (:inherit dired-directory))))
      `(lusty-file-face ((,class nil)))
      `(lusty-match-face ((,class (:inherit ido-first-match))))
      `(lusty-slash-face ((,class (:foreground ,cyan :weight bold))))
+;;;;; macrostep
+     `(macrostep-expansion-highlight-face ((,class (:background ,base02))))
 ;;;;; magit
 ;;;;;; headings and diffs
      `(magit-section-highlight           ((t (:background ,base02))))
@@ -1358,12 +1427,6 @@ customize the resulting theme."
      `(magit-diff-context-highlight      ((t (:background ,base02))))
      `(magit-diffstat-added              ((t (:foreground ,green))))
      `(magit-diffstat-removed            ((t (:foreground ,red))))
-;;;;;; popup
-     `(magit-popup-heading             ((t (:foreground ,yellow  :weight bold))))
-     `(magit-popup-key                 ((t (:foreground ,base1   :weight bold))))
-     `(magit-popup-argument            ((t (:foreground ,cyan    :weight bold))))
-     `(magit-popup-disabled-argument   ((t (:foreground ,base01  :weight normal))))
-     `(magit-popup-option-value        ((t (:foreground ,cyan    :weight bold))))
 ;;;;;; process
      `(magit-process-ok    ((t (:foreground ,green :weight bold))))
      `(magit-process-ng    ((t (:foreground ,red   :weight bold))))
@@ -1384,20 +1447,17 @@ customize the resulting theme."
      `(magit-bisect-skip ((t (:foreground ,yellow))))
      `(magit-bisect-bad  ((t (:foreground ,red))))
 ;;;;;; blame
-     `(magit-blame-heading ((t (:background ,base02 :foreground ,violet
-                                            :weight bold :slant normal :box (:color ,base02 :line-width 2)))))
-     `(magit-blame-hash    ((t (:background ,base02 :foreground ,violet
-                                            :weight normal :slant normal :box (:color ,base02 :line-width 2)))))
-     `(magit-blame-name    ((t (:background ,base02 :foreground ,violet
-                                            :weight normal :slant normal :box (:color ,base02 :line-width 2)))))
-     `(magit-blame-date    ((t (:background ,base02 :foreground ,violet
-                                            :weight bold :slant normal :box (:color ,base02 :line-width 2)))))
-     `(magit-blame-summary ((t (:background ,base02 :foreground ,base0
-                                            :weight bold :slant normal :box (:color ,base02 :line-width 2)))))
+     `(magit-blame-highlight ((t (:background ,base02))))
+     `(magit-blame-heading   ((t (:inherit magit-blame-highlight
+                                           :box (:color ,base02 :line-width 2)))))
+     `(magit-blame-summary   ((t (:foreground ,base0))))
+     `(magit-blame-hash      ((t (:foreground ,violet))))
+     `(magit-blame-name      ((t (:foreground ,violet))))
+     `(magit-blame-date      ((t (:foreground ,violet))))
 ;;;;;; references etc.
      `(magit-dimmed         ((t (:foreground ,base01))))
      `(magit-hash           ((t (:foreground ,base01))))
-     `(magit-tag            ((t (:foreground ,cyan :weight bold))))
+     `(magit-tag            ((t (:foreground ,cyan   :weight bold))))
      `(magit-branch-remote  ((t (:foreground ,green  :weight bold))))
      `(magit-branch-local   ((t (:foreground ,blue   :weight bold))))
      `(magit-branch-current ((t (:foreground ,blue   :weight bold :box t))))
@@ -1419,6 +1479,12 @@ customize the resulting theme."
      `(magit-reflog-cherry-pick  ((t (:foreground ,green))))
      `(magit-reflog-remote       ((t (:foreground ,cyan))))
      `(magit-reflog-other        ((t (:foreground ,cyan))))
+;;;;; magit-popup
+     `(magit-popup-heading             ((t (:foreground ,yellow  :weight bold))))
+     `(magit-popup-key                 ((t (:foreground ,base1   :weight bold))))
+     `(magit-popup-argument            ((t (:foreground ,cyan    :weight bold))))
+     `(magit-popup-disabled-argument   ((t (:foreground ,base01  :weight normal))))
+     `(magit-popup-option-value        ((t (:foreground ,cyan    :weight bold))))
 ;;;;; markdown-mode
      `(markdown-blockquote-face ((,class (:inherit font-lock-doc-face))))
      `(markdown-bold-face ((,class (:inherit bold))))
@@ -1637,7 +1703,9 @@ customize the resulting theme."
                           :foreground ,blue :background ,base03))))
      `(org-agenda-done ((,class (:foreground ,base01 :slant italic))))
      `(org-archived ((,class (:foreground ,base01 :weight normal))))
-     `(org-block ((,class (:foreground ,base01))))
+     `(org-block ((,class nil)))
+     `(org-block-begin-line ((,class (:inherit org-meta-line :underline t))))
+     `(org-block-end-line ((,class (:inherit org-meta-line :overline t))))
      `(org-checkbox ((,class (:background ,base03 :foreground ,base0
                                           :box (:line-width 1 :style released-button)))))
      `(org-code ((,class (:foreground ,base01))))
@@ -1669,6 +1737,7 @@ customize the resulting theme."
                                       :foreground ,blue))))
      `(org-link ((,class (:foreground ,yellow :underline t))))
      `(org-meta-line ((,class (:foreground ,base01 :slant italic))))
+     `(org-macro ((,class (:foreground ,s-base1))))
      `(org-sexp-date ((,class (:foreground ,violet))))
      `(org-scheduled ((,class (:foreground ,green))))
      `(org-scheduled-previously ((,class (:foreground ,cyan))))
@@ -1705,14 +1774,27 @@ customize the resulting theme."
      `(org-latex-and-export-specials ((,class (:foreground ,orange))))
      `(org-mode-line-clock-overrun ((,class (:inherit mode-line :background ,red))))
 ;;;;; outline
-     `(outline-1 ((,class (:inherit org-level-1 :height ,solarized-height-plus-4))))
-     `(outline-2 ((,class (:inherit org-level-2 :height ,solarized-height-plus-3))))
-     `(outline-3 ((,class (:inherit org-level-3 :height ,solarized-height-plus-2))))
-     `(outline-4 ((,class (:inherit org-level-4 :height ,solarized-height-plus-1))))
-     `(outline-5 ((,class (:inherit org-level-5))))
-     `(outline-6 ((,class (:inherit org-level-6))))
-     `(outline-7 ((,class (:inherit org-level-7))))
-     `(outline-8 ((,class (:inherit org-level-8))))
+     `(outline-1 ((,class (:inherit ,s-variable-pitch :foreground ,orange
+                                    ,@(and solarized-scale-outline-headlines
+                                           (list :height solarized-height-plus-4))))))
+     `(outline-2 ((,class (:inherit ,s-variable-pitch :foreground ,green
+                                    ,@(and solarized-scale-outline-headlines
+                                           (list :height solarized-height-plus-3))))))
+     `(outline-3 ((,class (:inherit ,s-variable-pitch :foreground ,blue
+                                    ,@(and solarized-scale-outline-headlines
+                                           (list :height solarized-height-plus-2))))))
+     `(outline-4 ((,class (:inherit ,s-variable-pitch :foreground ,yellow
+                                    ,@(when solarized-scale-outline-headlines
+                                        (list :height solarized-height-plus-1))))))
+     `(outline-5 ((,class (:inherit ,s-variable-pitch :foreground ,cyan))))
+     `(outline-6 ((,class (:inherit ,s-variable-pitch :foreground ,green))))
+     `(outline-7 ((,class (:inherit ,s-variable-pitch :foreground ,red))))
+     `(outline-8 ((,class (:inherit ,s-variable-pitch :foreground ,blue))))
+;;;;; outline-minor-faces
+     `(outline-minor-0 ((,class (:weight bold :background ,s-base2))))
+     `(outline-minor-1
+       ((,class (:inherit (outline-minor-0 outline-1)
+                 :background ,(solarized-color-blend s-base3 yellow .9)))))
 ;;;;; paren-face
      `(paren-face  ((,class (:foreground ,base01))))
 ;;;;; perspective
@@ -1980,6 +2062,25 @@ customize the resulting theme."
      ;; zencoding uses this.
      `(tooltip ((,class (:background ,yellow-lc :foreground ,yellow-hc
                                      :inherit ,s-variable-pitch))))
+;;;;; transient
+     `(transient-heading             ((t (:foreground ,yellow  :weight bold))))
+     `(transient-key                 ((t (:foreground ,base1   :weight bold))))
+     `(transient-argument            ((t (:foreground ,cyan    :weight bold))))
+     `(transient-value               ((t (:foreground ,cyan    :weight bold))))
+     `(transient-inactive-argument   ((t (:foreground ,base01  :weight normal))))
+     `(transient-inactive-value      ((t (:foreground ,base01  :weight normal))))
+     `(transient-unreachable         ((t (:foreground ,base01  :weight normal))))
+     `(transient-unreachable-key     ((t (:foreground ,base01  :weight normal))))
+     `(transient-enabled-suffix      ((t (:foreground ,s-base3
+                                          :background ,green
+                                          :weight bold))))
+     `(transient-disabled-suffix     ((t (:foreground ,s-base3
+                                          :background ,red
+                                          :weight bold))))
+     `(transient-nonstandard-key
+       ((t (:underline nil :background ,(solarized-color-blend yellow-l s-base3 0.2)))))
+     `(transient-mismatched-key
+       ((t (:underline nil :background ,(solarized-color-blend red-l s-base3 0.2)))))
 ;;;;; tuareg
      `(tuareg-font-lock-governing-face ((,class (:foreground ,magenta :weight bold))))
      `(tuareg-font-lock-multistage-face ((,class (:foreground ,blue :background ,base02
@@ -2197,6 +2298,8 @@ customize the resulting theme."
               ,blue-d ,cyan ,magenta ,violet))
 ;;;;; highlight-changes
      `(highlight-changes-colors '(,magenta ,violet))
+;;;;; highlight-parentheses
+     `(hl-paren-colors '(,cyan ,yellow ,blue ,violet ,green))
 ;;;;; highlight-symbol
      `(highlight-symbol-foreground-color ,base1)
      `(highlight-symbol-colors
